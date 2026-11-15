@@ -1,0 +1,17 @@
+@"
+node_modules/
+venv/
+.venv/
+__pycache__/
+.expo/
+dist/
+web-build/
+android/
+ios/
+.env
+.env.local
+.DS_Store
+Thumbs.db
+docs/screenshots/
+_contact-sheet.png
+"@ | Out-File -Encoding utf8 .gitignore
