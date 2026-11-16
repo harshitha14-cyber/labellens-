@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "LabelLens India",
+    "slug": "labellens-india",
+    "version": "0.1.0",
+    "scheme": "labellens",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FBF8F3"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "in.labellens.app"
+    },
+    "android": {
+      "package": "in.labellens.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#FBF8F3",
+        "foregroundImage": "./assets/android-icon-foreground.png"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "LabelLens uses the camera to photograph product ingredient labels."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "LabelLens lets you pick label photos from your gallery."
+        }
+      ],
+      "expo-image",
+      "expo-asset"
+    ]
+  }
+}
