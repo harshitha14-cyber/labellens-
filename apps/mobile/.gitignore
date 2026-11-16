@@ -1,0 +1,22 @@
+# Dependencies & Virtual Environments
+node_modules/
+venv/
+.venv/
+__pycache__/
+
+# Expo / React Native build outputs
+.expo/
+dist/
+web-build/
+android/
+ios/
+
+# Environment & OS files
+.env
+.env.local
+.DS_Store
+Thumbs.db
+
+# Exclude Milestone 1 web screenshots
+docs/screenshots/
+_contact-sheet.png
