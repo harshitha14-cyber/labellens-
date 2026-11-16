@@ -1,0 +1,26 @@
+# NOTE: written in Milestone 2; it has NOT been run on GitHub yet. Check the first run's result.
+name: ci-api
+on:
+  push: { paths: ["services/api/**", ".github/workflows/ci-api.yml"] }
+  pull_request: { paths: ["services/api/**"] }
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_PASSWORD: postgres }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 3s --health-retries 10
+    defaults: { run: { working-directory: services/api } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip, cache-dependency-path: services/api/pyproject.toml }
+      - run: pip install -e ".[dev]"
+      - name: Create roles and databases
+        run: psql "postgresql://postgres:postgres@localhost:5432/postgres" -f scripts/dev_db_setup.sql
+      - run: ruff check .
+      - run: mypy app
+      - run: pytest -q

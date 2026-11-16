@@ -1,6 +1,6 @@
 # 11 · Local Development Setup
 
-**Mobile section (§4) was executed in Milestone 1 (Node v22, npm 10).** The API/Supabase sections are still untested until Milestone 2.
+**Mobile (§4) was executed in M1. The API was executed in M2 on Linux/PostgreSQL 16, not on Windows. For the API use `services/api/README.md` (current, Windows-friendly); the Supabase CLI path below is NOT tested** (a local Supabase stack needs Docker).
 
 ## Prerequisites
 | Tool | Version guidance |

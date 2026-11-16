@@ -137,3 +137,8 @@ Every endpoint: schema test (Pydantic ↔ OpenAPI), authz test (other user's id 
 }
 ```
 (Values above are format illustrations, **not** real assessments.)
+
+## Implementation status (updated Milestone 2)
+**Implemented and tested:** `/health`, `/meta`, `/categories`, `/ingredients/search`, `/ingredients/{id}`, `/scans` (POST, GET list, GET one, PATCH, DELETE), `/scans/{id}/images` (POST, DELETE), `/scans/{id}/images/{image_id}/url` (signed URL), `/me` (GET, PATCH, DELETE), `/me/preferences` (GET, PUT), `/me/favourites` (GET, POST, DELETE), `/products` (GET list), `/products/{id}` (GET).
+**Deviation from the original contract:** `/scans/{id}/images/{image_id}/url` and `/files/{path}` were added (signed-URL image access); `POST /products` is deferred to Milestone 5 with the catalogue; `GET /me/export` to Milestone 7.
+**Not yet implemented:** `/scans/{id}/process`, `/ingredients` confirm/parse-text, `/analyse`, `/report` (M3-M4); `/alternatives`, `/comparisons` (M6); `/products/lookup`; rate limits (M8). `HEIC` uploads are rejected (needs `pillow-heif`).

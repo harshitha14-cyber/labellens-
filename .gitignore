@@ -1,17 +1,24 @@
-@"
-node_modules/
-venv/
+# secrets & env
+.env
+.env.*
+!.env.example
+# python
 .venv/
 __pycache__/
-.expo/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+services/api/.storage/
+# node
+node_modules/
+# generated / local artefacts
 dist/
-web-build/
-android/
-ios/
-.env
-.env.local
-.DS_Store
-Thumbs.db
+dist-android/
+.expo/
+/apps/mobile/android/
+/apps/mobile/ios/
+# screenshots are local test evidence, not source
 docs/screenshots/
-_contact-sheet.png
-"@ | Out-File -Encoding utf8 .gitignore
+screenshots/
+*.zip

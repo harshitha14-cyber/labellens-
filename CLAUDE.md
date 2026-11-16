@@ -25,3 +25,5 @@ Expo SDK 57 (D-003 resolved) · TypeScript strict · Expo Router · NativeWind �
 Update CLAUDE.md, PROJECT_STATUS.md, CHANGELOG.md, DECISIONS.md, TEST_REPORT.md → give exact commands to test → list limitations → STOP.
 - Local-only, zero-cost: no hosting work (D-008).
 - Run `npx expo install <pkg>` (never plain npm add) for Expo packages. Never use pkill -f with a pattern that matches your own command.
+- Backend facts: API connects as `ll_app` (RLS enforced); schema changes only via Alembic; every new table needs RLS policy + test; run tests with Postgres >= 15.
+- Deliver only changed files each milestone (no zip); give git push steps; never commit screenshots, `.env`, `.venv`, `.storage`.

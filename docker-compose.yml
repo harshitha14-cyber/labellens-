@@ -1,0 +1,32 @@
+# NOTE: written in Milestone 2 but NOT run (no Docker in the build environment).
+# Starts PostgreSQL 16 and creates the ll_owner / ll_app roles and the labellens + labellens_test databases.
+#   docker compose up -d db
+# then (from services/api):  alembic upgrade head && python -m data_pipeline.seed_dev
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./services/api/docker/01-roles-and-dbs.sql:/docker-entrypoint-initdb.d/01-roles-and-dbs.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  api:
+    build: ./services/api
+    profiles: ["api"]   # docker compose --profile api up --build
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      DATABASE_URL: postgresql+psycopg://ll_app:ll_app_dev@db:5432/labellens
+      MIGRATION_DATABASE_URL: postgresql+psycopg://ll_owner:ll_owner_dev@db:5432/labellens
+      SUPABASE_JWT_SECRET: dev-only-secret-change-me-dev-only-secret
+      STORAGE_BACKEND: local
+      LOCAL_STORAGE_DIR: /srv/.storage
+    ports: ["8000:8000"]
+volumes:
+  pgdata:

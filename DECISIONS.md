@@ -27,3 +27,16 @@
 | D-015 | Home tab route is `/home` (splash owns `/`); avoids a route conflict found during testing. |
 | D-016 | Mock data labelled "Demo data" on every screen; all assessments/sources/regulations in `mocks/data.ts` are placeholders. |
 | D-017 | `expo-asset`, `babel-preset-expo` are explicit dependencies (required on SDK 57). |
+
+## Updates 2026-11-16 (Milestone 2)
+| ID | Update |
+|---|---|
+| — | **M1 approved by the user.** Also: from now on deliver changed files only (no zip), and give git push instructions after each milestone. Screenshots are local evidence and are not pushed. |
+| D-018 | **No Docker/Supabase stack was available in the build environment**, so M2 was tested against a real PostgreSQL 16 installed via apt, with a local signed-URL storage backend. Supabase Auth/Storage are supported by interface (JWT verify via HS256 secret or JWKS; `SupabaseStorage` adapter) but **not tested against a real Supabase project**. |
+| D-019 | JWT algorithm is pinned per mode (HS256 secret, or ES256/RS256 via JWKS); `alg=none`, other HMAC algs, wrong audience, missing `sub`, and `service_role` tokens are rejected. |
+| D-020 | API connects as `ll_app` (NOBYPASSRLS); each transaction sets `request.jwt.claims`; with no claims, user tables return nothing (fail closed). Other users' resources return **404**, never 403. |
+| D-021 | `auth.uid()` shim is created only if missing (so migrations work locally and on real Supabase). Role name is configurable via `APP_DB_ROLE`. |
+| D-022 | PostgreSQL **>= 15** required (`UNIQUE NULLS NOT DISTINCT`). |
+| D-023 | Uploads are decoded and re-encoded as JPEG (strips EXIF/GPS and trailing bytes), long side capped at 2000 px, 10 MB limit, min short side 600 px. HEIC unsupported until `pillow-heif` is added. `blur_score` is NULL until M3 (OpenCV). |
+| D-024 | `DELETE /me` is a soft delete (403 afterwards); hard purge job is M7. `POST /products` deferred to M5. |
+| D-025 | M1 fixes: `darkMode: "class"` in Tailwind config (NativeWind web dev error), `expo-system-ui` added, `/android` and `/ios` git-ignored (Expo prebuild output). Running on a phone via **Expo Go** is the supported path on machines without the Android SDK. |

@@ -1,5 +1,6 @@
 /** Design tokens: warm white, forest green, soft neutral surfaces. */
 module.exports = {
+  darkMode: "class", // app is light-only; "media" makes NativeWind web throw in dev
   content: ["./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
